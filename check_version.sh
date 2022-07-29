@@ -16,5 +16,5 @@ if [ "${LATEST_BUILD_VERSION}" != "${CURRENT_AUR_VERSION}" ]; then
 	exit 0
 fi
 
-echo "Current version (${CURRENT_AUR_VERSION}) is the latest one."
+echo "Current version (${CURRENT_AUR_VERSION}) is the latest one. You can check the latest version here: https://cloudsmith.io/~beyond-identity/repos/linux-authenticator/packages/?q=filename%3Agz%24"
 exit 0
