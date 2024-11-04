@@ -5,7 +5,7 @@ send_dm() {
 	curl -s -X POST -H 'Content-Type: application/json' -d '{"chat_id": '"${TELEGRAM_CHAT_ID}"', "text": "'"${1}"'", "disable_notification": true}' https://api.telegram.org/bot"${TELEGRAM_BOT_TOKEN}"/sendMessage
 }
 
-CURRENT_AUR_VERSION:$(curl -s 'https://aur.archlinux.org/rpc/?v=5&type=info&arg[]=beyond-identity-bin' | jq .results[].Version -r | cut -d'-' -f1 | sed 's/_/-/g')
+CURRENT_AUR_VERSION=$(curl -s 'https://aur.archlinux.org/rpc/?v=5&type=info&arg[]=beyond-identity-bin' | jq .results[].Version -r | cut -d'-' -f1 | sed 's/_/-/g')
 
 CLOUDSMITH_RESPONSE=$(curl -s -G --data-urlencode 'query=format:raw' --data-urlencode 'sort=-date' 'https://api.cloudsmith.io/v1/packages/beyond-identity/linux-authenticator/')
 LATEST_BUILD_VERSION=$(echo "${CLOUDSMITH_RESPONSE}" | jq '. | first | .version' -r)
