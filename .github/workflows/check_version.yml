@@ -1,0 +1,26 @@
+name: Check Beyond Identity Version
+
+on:
+  schedule:
+    # Runs daily at 3:17 AM UTC
+    - cron: '17 3 * * *'
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  check_version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y curl jq
+
+      - name: Make script executable
+        run: chmod +x ./check_version.sh
+
+      - name: Run version check script
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: ./check_version.sh
