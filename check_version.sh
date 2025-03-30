@@ -1,5 +1,4 @@
 #!/bin/sh
-set -euo pipefail
 
 send_dm() {
 	curl -s -X POST -H 'Content-Type: application/json' -d '{"chat_id": '"${TELEGRAM_CHAT_ID}"', "text": "'"${1}"'", "disable_notification": true}' https://api.telegram.org/bot"${TELEGRAM_BOT_TOKEN}"/sendMessage
